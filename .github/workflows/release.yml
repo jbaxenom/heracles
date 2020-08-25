@@ -13,8 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build & Publish Linux binary
-        run: dotnet publish -c Release -r linux-x64 -o out
+      - name: Publish OSX-64 binary
+        run: dotnet publish -c Release -r osx-x64 -o out
       
       - name: Create Release
         id: create_release
