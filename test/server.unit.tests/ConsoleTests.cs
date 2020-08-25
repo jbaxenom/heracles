@@ -11,6 +11,8 @@ namespace server.unit.tests
         [TestMethod]
         public void Should_PromptUser_ToInsertAmountAndCaptureIt()
         {
+            // TC1
+
             // Arrange
             var output = new StringWriter();
             Console.SetOut(output);
@@ -22,7 +24,7 @@ namespace server.unit.tests
             Program.Main(new string[] { });
 
             // Assert
-            output.ToString().Should().Be($"Enter the amount to format: {Environment.NewLine}Your formatted amount is: 100{Environment.NewLine}");
+            output.ToString().Should().Be($"Enter the amount to format: {Environment.NewLine}Your formatted amount is: '100.00'{Environment.NewLine}");
         }
     }
 }
