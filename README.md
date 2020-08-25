@@ -128,10 +128,11 @@ TC3: if the input has no decimal points, the resulting amount string should add 
 From UAC3-6 we can add:
 
 ```
-TC4: if the input is a negative number, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number in digits'
-TC5: if the input contains a non-digit character, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number in digits'
-TC6: if the input is empty, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number in digits'
-TC7: if the input is a very big number, heracles should be able to handle it
+TC4: if the input is a negative number, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number of up to 29 digits'
+TC5: if the input contains a non-digit character, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number of up to 29 digits'
+TC6: if the input is an empty space, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number of up to 29 digits'
+TC7: if the input is a number above 29 digits, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number of up to 29 digits'
+TC8: if the input is empty (new line), heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number of up to 29 digits'
 ```
 
 
@@ -169,7 +170,7 @@ logic falls into it, most probably it can be broken down and more tests should b
 the design is done to favour reliability and robustness, one piece at a time.
 
 Sometimes several use cases can be implemented in one go, for example when programming frameworks help handling multiple things in one instruction. As you can see this is the case for some test cases in this implementation, 
-as the `double.ToString("<format>")` formatter does most of the work needed to implement the requirements. Another example is TC7, which is implemented simply by using `decimal` instead of `float` or `double`. 
+as the `double.ToString("<format>")` formatter does most of the work needed to implement the requirements.
 
 #### 6. See the test pass
 In here is where I'll also add the Stryker.NET run, because I want to make sure my tests and code are robust. I always get the feeling my code gets much better after using Stryker. 

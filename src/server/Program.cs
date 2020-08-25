@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace server
 {
@@ -8,11 +9,19 @@ namespace server
         {
             var inputMessage = "Enter the amount to format: ";
             Console.WriteLine(inputMessage);
-            decimal amount = new ConsoleAmountRetriever().GetAmount();
 
-            string formattedMoney = new MoneyFormatter().Format(amount);
+            string outputMessage;
+            try
+            {
+                string amount = new ConsoleAmountRetriever().GetAmount();
+                string formattedMoney = new MoneyFormatter().Format(amount);
+                outputMessage = $"Your formatted amount is: {formattedMoney}";
+            }
+            catch (ArgumentException e)
+            {
+                outputMessage = e.Message;
+            }
 
-            var outputMessage = $"Your formatted amount is: {formattedMoney}";
             Console.WriteLine(outputMessage);
         }
     }
