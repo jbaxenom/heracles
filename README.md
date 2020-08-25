@@ -87,6 +87,11 @@ Then the Heracles formatter responds with error "You have entered an invalid amo
 Given the user is promtped with entering an amount
 When they input an empty amount
 Then the Heracles formatter responds with error "You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number in digits"
+
+#UAC6
+Given the user is prompted with entering an amount
+When they input a very big amount
+Then the Heracles formatter responds without error
 ```
 
 There are multiple considerations around the behavior of the application that cannot be inferred from the Examples provided or the 
@@ -120,12 +125,13 @@ From UAC2 we can add the following:
 TC3: if the input has no decimal points, the resulting amount string should add '.00' at the end
 ```
 
-From UAC3-5 we can add:
+From UAC3-6 we can add:
 
 ```
 TC4: if the input is a negative number, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number in digits'
 TC5: if the input contains a non-digit character, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number in digits'
 TC6: if the input is empty, heracles should show an error with text 'You have entered an invalid amount. The amount must be a positive, decimal or non-decimal number in digits'
+TC7: if the input is a very big number, heracles should be able to handle it
 ```
 
 
@@ -163,7 +169,7 @@ logic falls into it, most probably it can be broken down and more tests should b
 the design is done to favour reliability and robustness, one piece at a time.
 
 Sometimes several use cases can be implemented in one go, for example when programming frameworks help handling multiple things in one instruction. As you can see this is the case for some test cases in this implementation, 
-as the `double.ToString("<format>")` formatter does most of the work needed to implement the requirements.
+as the `double.ToString("<format>")` formatter does most of the work needed to implement the requirements. Another example is TC7, which is implemented simply by using `decimal` instead of `float` or `double`. 
 
 #### 6. See the test pass
 In here is where I'll also add the Stryker.NET run, because I want to make sure my tests and code are robust. I always get the feeling my code gets much better after using Stryker. 

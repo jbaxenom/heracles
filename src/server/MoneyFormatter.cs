@@ -1,12 +1,16 @@
-using System;
+using System.Globalization;
 
 namespace server
 {
     public class MoneyFormatter
     {
-        public string Format(double moneyInput)
+        public string Format(decimal moneyInput)
         {
-            return moneyInput.ToString("F2");
+            var format = "#,0.00";
+            var customFormatter = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+            customFormatter.NumberGroupSeparator = " ";            
+            
+            return moneyInput.ToString(format, customFormatter);
         }
     }
 }
