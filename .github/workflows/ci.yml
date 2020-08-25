@@ -31,7 +31,7 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build heracles.sln --configuration Release --no-restore
+      run: dotnet build --no-restore
 
     - name: Test
-      run: dotnet test test/server.unit.tests/server.unit.tests.csproj --no-build
+      run: dotnet test --no-build
