@@ -35,3 +35,13 @@ jobs:
 
     - name: Test
       run: dotnet test --no-build
+
+    - name: Stryker.NET install
+      run: dotnet tool install -g dotnet-stryker
+    
+    - name: Run Mutation Tests
+      run: |
+        cd test/server.unit.tests
+        dotnet stryker
+
+

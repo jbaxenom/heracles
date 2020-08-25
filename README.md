@@ -43,8 +43,8 @@ As the specification is given by example, I decided to implement it using TDD. T
 4. See the UT case fail
 5. Implement the functionality to make the test pass
 6. See the test pass
-7. Iterate from 3
-8. Refactor
+7. Refactor (if needed)
+8. Iterate from 3 with a new test case
 
 #### User-level AC
 
@@ -132,14 +132,48 @@ TC6: if the input is empty, heracles should show an error with text 'You have en
 #### 3. Implement a Unit Test
 These TCs will be implemented as Unit Test, shaping the functionality and the design of the application. 
 
-A more experienced developer can look at all the test cases and make design decisions before start coding, saving a lot of time. 
-
-In this case, for the first iteration I knew the following:
-- I need to create a Program class to run the console application (`Main`). Adding all logic there, however simple, is not very testable, so I need to create a separated class `MoneyFormatter.cs`
+A more experienced developer can look at the test cases as a whole and make design decisions before starting to code, saving a lot of time. For example, for the first iteration of Heracles I knew the following:
+- I need to create a Program class to run the console application (`Main`).
+- Adding all logic there, however simple, is not very testable, so I need to create a separated class `MoneyFormatter.cs`
   that contains the formatting logic. Thanks to that I can separate the tests of the formatter from the tests of the actual console app. 
-- I need to abstract the console read functionality in order to stub it and test the console app itself, for what I created the simple `ConsoleAmountRetriever.cs`.
-- The Console.ReadLine() returns a string, which means I need to transform to Decimal so that I can use its rounding capabilities.
-- 
+- I need to abstract the console read functionality in order to stub it and test the console app itself. For that I create the simple `ConsoleAmountRetriever.cs`.
+- The Console.ReadLine() returns a string, which means I need to transform to double to use its formatting capabilities.
+
+There are 2 libraries I always use for test automation: a fluent assertion library and a mock library. The first is important
+to make the tests as readable as possible. The second is obviously needed to separate concerns and test components individually. In C# the best
+libraries for these tasks are `FluentAssertions` and `Moq`, respectively.
+
+The choice of test framework is pretty much up to taste. In C# I use `MStest` because it integrates nicely with Azure DevOps test management module, linking test methods to the respective "test case task" and automatically
+run them by test plan.   
+
+In addition, one of the best complementary techniques to improve over TDD -and to develop in general- is the use of *Mutation Testing* frameworks. Mutation testing
+introduces bugs in the code (mutants) and checks if your Unit Tests catch them. One of the best mutation testing tools for C# is `Stryker.NET`. Its reports help not only
+ensuring your UTs are optimal, but also make your code better by ensuring you follow best practices in making code robust against bugs. 
+
+Once the tools are chosen and dependencies installed, we can start writing a test. I use the _Arrange_, _Act_ and _Assert_ paradigm, which is pretty much like Guerkin's _Given_, _When_, _Then_. It makes tests systematic and 
+easy to read: we set up test data and/or stubs in _Arrange_, we run the SUT in _Act_ and then we _Assert_ that the actual behavior is the expected one.  
+
+#### 4. See the UT case fail
+In TDD, the SUT is being developed after the test, which means that we can only build skeletons of it and then fill them up with functionality as we 
+go through the different test cases. Running the UT and seeing it fail -not crash- is important to make sure we're not missing any check.
+
+#### 5. Implement the functionality to make the test pass
+If following the steps properly you'll realise this one gets quite simplified vs the classic "big-bang" approach: you need to focus on implementing the part that makes the test pass. If too much
+logic falls into it, most probably it can be broken down and more tests should be added. Code will be constantly refactored and changed, which is fine although it feels like a waste of time. In fact it is not, as
+the design is done to favour reliability and robustness, one piece at a time.
+
+Sometimes several use cases can be implemented in one go, for example when programming frameworks help handling multiple things in one instruction. As you can see this is the case for some test cases in this implementation, 
+as the `double.ToString("<format>")` formatter does most of the work needed to implement the requirements.
+
+#### 6. See the test pass
+In here is where I'll also add the Stryker.NET run, because I want to make sure my tests and code are robust. I always get the feeling my code gets much better after using Stryker. 
+
+#### 7. Refactor (if needed)
+Most probably it will be needed, as functionality is added independently and often can be joined or abstracted. If not done in step 5, now is the time before it gets too clunky.
+
+#### 8. Repeat from step 3
+The whole exercise has been done following the steps above, so there was a lot of repeating!
+
 
 
 
