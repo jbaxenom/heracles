@@ -14,8 +14,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Publish OSX-64 binary
-        run: dotnet publish -c Release -r osx-x64 -o out
+        run: dotnet publish -c Release -r osx-x64 -o out-osx --self-contained true .\src\server\server.csproj
       
+      - name: Publish Linux-64 binary
+        run: dotnet publish -c Release -r linux-x64 -o out-linux --self-contained true .\src\server\server.csproj
+      
+      - name: Publish Windows-10 binary
+        run: dotnet publish -c Release -r win10-x64 -o out-win --self-contained true .\src\server\server.csproj
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -29,12 +35,32 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
+      - name: Upload Win10 binary
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./out/heracles
-          asset_name: heracles
+          asset_path: ./out-win/heracles.exe
+          asset_name: heracles-win
+          asset_content_type: application/octet-stream
+
+      - name: Upload Linux binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./out-linux/heracles
+          asset_name: heracles-linux
+          asset_content_type: application/octet-stream
+
+      - name: Upload OSX binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./out-osx/heracles
+          asset_name: heracles-osx
           asset_content_type: application/octet-stream
