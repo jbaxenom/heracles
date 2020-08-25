@@ -4,9 +4,9 @@ namespace server
 {
     class ConsoleAmountRetriever
     {
-        public virtual decimal GetAmount()
+        public virtual double GetAmount()
         {
-            return decimal.Parse(Console.ReadLine());
+            return double.Parse(Console.ReadLine());
         }
     }
 }

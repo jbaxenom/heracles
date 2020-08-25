@@ -106,7 +106,7 @@ Let's start with UAC1. From the format conversion we can infer the following:
 
 ```
 TC1: heracles must prompt the user to enter a money amount and capture it
-TC2: given an amount input, heracles should display it as a string with a given format
+TC2: given an amount input, heracles should display it as a string with the heracles format
 TC2.1: the resulting amount string should have 2 decimal points
 TC2.2: the resulting amount string decimal points should be marked with a '.' symbol
 TC2.3: if the input has more than 2 decimal points, the resulting amount string should show the decimals rounded up to the closest 2 decimal points
