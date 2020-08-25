@@ -10,7 +10,7 @@ namespace server
             var customFormatter = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
             customFormatter.NumberGroupSeparator = " ";            
             
-            return moneyInput.ToString(format, customFormatter);
+            return $"'{moneyInput.ToString(format, customFormatter)}'";
         }
     }
 }

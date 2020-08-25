@@ -24,7 +24,7 @@ namespace server.unit.tests
             Program.Main(new string[] { });
 
             // Assert
-            output.ToString().Should().Be($"Enter the amount to format: {Environment.NewLine}Your formatted amount is: 100.00{Environment.NewLine}");
+            output.ToString().Should().Be($"Enter the amount to format: {Environment.NewLine}Your formatted amount is: '100.00'{Environment.NewLine}");
         }
     }
 }

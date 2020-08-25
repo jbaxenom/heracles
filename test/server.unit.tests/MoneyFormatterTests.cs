@@ -20,7 +20,7 @@ namespace server.unit.tests
             var formattedMoney = formatter.Format(money);
 
             // Assert
-            formattedMoney.Split(new char[] { '.' })[1].Length.Should().Be(2);
+            formattedMoney.Split(new char[] { '.' })[1].Split(new char[] { '\'' }).Length.Should().Be(2);
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace server.unit.tests
             var formattedMoney = formatter.Format(money);
 
             // Assert
-            formattedMoney.Should().Be($"{expectedMoney}.{expectedCents}");
+            formattedMoney.Should().Be($"'{expectedMoney}.{expectedCents}'");
 
         }
 
@@ -55,12 +55,12 @@ namespace server.unit.tests
             var formattedMoney = formatter.Format(money);
 
             // Assert
-            formattedMoney.Split(new char[] { '.' })[1].Length.Should().Be(2);
+            formattedMoney.Split(new char[] { '.' })[1].Split(new char[] { '\'' }).Length.Should().Be(2);
         }
 
         [DataTestMethod]
-        [DataRow("231000", "231 000.00")]
-        [DataRow("231000000", "231 000 000.00")]
+        [DataRow("231000", "'231 000.00'")]
+        [DataRow("231000000", "'231 000 000.00'")]
         public void Should_SeparateGroups_WithSpace(string money, string expectedMoney)
         {
             // TC2.4
@@ -74,6 +74,23 @@ namespace server.unit.tests
 
             // Assert
             formattedMoney.Should().Be(expectedMoney);
+        }
+
+        [TestMethod]
+        public void Should_AddSingleQuotesToOutput()
+        {
+            // TC2.5
+
+            // Arrange
+            MoneyFormatter formatter = new MoneyFormatter();
+            decimal money = 2310000.159897m;
+            string expectedResult = "'2 310 000.16'";
+
+            // Act
+            var formattedMoney = formatter.Format(money);
+
+            // Assert
+            formattedMoney.Should().Be(expectedResult);
         }
     }
 }
