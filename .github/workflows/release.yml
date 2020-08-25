@@ -21,6 +21,11 @@ jobs:
       
       - name: Publish Windows-10 binary
         run: dotnet publish -c Release -r win10-x64 -o out-win
+      
+      - name: Zip windows binaries
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq ./heracles-win.zip ./out-win/heracles.*
 
       - name: Create Release
         id: create_release
@@ -41,9 +46,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./out-win/heracles.exe
-          asset_name: heracles-win
-          asset_content_type: application/octet-stream
+          asset_path: ./heracles-win.zip
+          asset_name: heracles-win.zip
+          asset_content_type: application/zip
 
       - name: Upload Linux binary
         uses: actions/upload-release-asset@v1
