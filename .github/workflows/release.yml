@@ -23,9 +23,7 @@ jobs:
         run: dotnet publish -c Release -r win10-x64 -o out-win
       
       - name: Zip windows binaries
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq ./heracles-win.zip ./out-win/heracles.*
+        run: zip -r ./heracles-win.zip ./out-win/heracles.* -x "*.pdb" "*.deps*" "*.runtime*"
 
       - name: Create Release
         id: create_release
