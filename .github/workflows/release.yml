@@ -14,13 +14,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Publish OSX-64 binary
-        run: dotnet publish -c Release -r osx-x64 -o out-osx --self-contained true .\src\server\server.csproj
+        run: dotnet publish -c Release -r osx-x64 -o out-osx
       
       - name: Publish Linux-64 binary
-        run: dotnet publish -c Release -r linux-x64 -o out-linux --self-contained true .\src\server\server.csproj
+        run: dotnet publish -c Release -r linux-x64 -o out-linux
       
       - name: Publish Windows-10 binary
-        run: dotnet publish -c Release -r win10-x64 -o out-win --self-contained true .\src\server\server.csproj
+        run: dotnet publish -c Release -r win10-x64 -o out-win
 
       - name: Create Release
         id: create_release
