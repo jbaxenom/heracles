@@ -44,4 +44,7 @@ jobs:
         cd test/server.unit.tests
         dotnet stryker
 
-
+    - uses: actions/upload-artifact@v2
+      with:
+        name: stryker-report
+        path: /test/server.unit.tests/StrykerOutput/**/reports/mutation-report.html
