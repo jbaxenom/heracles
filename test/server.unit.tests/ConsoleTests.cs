@@ -9,17 +9,20 @@ namespace server.unit.tests
     public class ConsoleTests
     {
         [TestMethod]
-        public void Should_PromptUser_ToInsertAmount()
+        public void Should_PromptUser_ToInsertAmountAndCaptureIt()
         {
             // Arrange
             var output = new StringWriter();
             Console.SetOut(output);
 
+            var input = new StringReader("100");
+            Console.SetIn(input);
+
             // Act
             Program.Main(new string[] { });
 
             // Assert
-            output.ToString().Should().Be($"Enter the amount to format: {Environment.NewLine}");
+            output.ToString().Should().Be($"Enter the amount to format: {Environment.NewLine}Your formatted amount is: 100{Environment.NewLine}");
         }
     }
 }

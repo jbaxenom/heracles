@@ -7,6 +7,9 @@ namespace server
         public static void Main(string[] args)
         {
             Console.WriteLine("Enter the amount to format: ");
+            decimal amount = new ConsoleAmountRetriever().GetAmount();
+
+            Console.WriteLine($"Your formatted amount is: {amount}");
         }
     }
 }
