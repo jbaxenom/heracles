@@ -103,7 +103,12 @@ description of the exercise. Some examples are:
   - Does it restart immediatedly instead?\
   - Perhaps it asks the user what to do? How?
 
-In order to 
+In order to finish the implementation I took some assumptions based on the above (normally I would have a PO to ask these questions):
+- I provided some basic messages for the question and answers
+- The application will:
+  - Terminate after pressing a key in DROP 1
+  - Stay running waiting for more calls in DROP 2
+  - Reload the form in DROP 3
 
 ### 2. Breaking AC into Test Cases
 
@@ -143,7 +148,6 @@ A more experienced developer can look at the test cases as a whole and make desi
 - I need to create a Program class to run the console application (`Main`).
 - Adding all logic there, however simple, is not very testable, so I need to create a separated class `MoneyFormatter.cs`
   that contains the formatting logic. Thanks to that I can separate the tests of the formatter from the tests of the actual console app. 
-- I need to abstract the console read functionality in order to stub it and test the console app itself. For that I create the simple `ConsoleAmountRetriever.cs`.
 - The Console.ReadLine() returns a string, which means I need to transform to double to use its formatting capabilities.
 
 There are 2 libraries I always use for test automation: a fluent assertion library and a mock library. The first is important
@@ -181,7 +185,8 @@ Most probably it will be needed, as functionality is added independently and oft
 ### 8. Repeat from step 3
 The whole exercise has been done following the steps above, so there was a lot of repeating!
 
-
+## Usage
+Download the binaries for your OS, decompress them and run the "heracles" binary (you might need to 'chmod +x'). 
 
 
 

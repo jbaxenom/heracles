@@ -17,14 +17,20 @@ namespace server.unit.tests
             var output = new StringWriter();
             Console.SetOut(output);
 
-            var input = new StringReader("100");
-            Console.SetIn(input);
+            var input = string.Join(Environment.NewLine, new[]
+            {
+                "100",
+                Environment.NewLine
+            });
+
+            Console.SetIn(new StringReader(input));
 
             // Act
             Program.Main(new string[] { });
 
             // Assert
-            output.ToString().Should().Be($"Enter the amount to format: {Environment.NewLine}Your formatted amount is: '100.00'{Environment.NewLine}");
+            var expectedMessage = $"Welcome to HERACLES!{Environment.NewLine}{Environment.NewLine}Enter the amount to format:{Environment.NewLine}{Environment.NewLine}Thanks! Your formatted amount is: '100.00'{Environment.NewLine}{Environment.NewLine}Press any key to exit Heracles...{Environment.NewLine}";
+            output.ToString().Should().Be(expectedMessage);
         }
     }
 }
