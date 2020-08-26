@@ -1,7 +1,7 @@
 on:
   push:
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - 'v*'
 
 name: Create Release
 
@@ -11,101 +11,56 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+        - os: ubuntu-latest
+          TARGET: linux-x64
+          NAME: linux
+          FULLNAME: Linux
+        - os: windows-latest
+          TARGET: win10-x64
+          NAME: win
+          FULLNAME: Windows
+        - os: macos-latest
+          TARGET: ost-x64
+          NAME: mac
+          FULLNAME: MacOS
+
     runs-on: ${{ matrix.os }}
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Publish MacOS binary
-        run: dotnet publish -c Release -r osx-x64 -o heracles-mac
-        if: matrix.os == 'macos-latest'
+      - name: Publish binary
+        run: dotnet publish -c Release -r ${{matrix.TARGET}} -o heracles-${{matrix.NAME}}
       
-      - name: Zip MacOS binaries
-        run: zip -r ./heracles-mac.zip ./heracles-mac/*
-        if: matrix.os == 'macos-latest'
-      
-      - name: Publish Linux-64 binary
-        run: dotnet publish -c Release -r linux-x64 -o heracles-linux
-        if: matrix.os == 'ubuntu-latest'
-      
-      - name: Zip Linux binaries
-        run: zip -r ./heracles-linux.zip ./heracles-linux/*
-        if: matrix.os == 'ubuntu-latest'
-      
-      - name: Publish Windows-10 binary
-        run: dotnet publish -c Release -r win10-x64 -o heracles-win
-        if: matrix.os == 'windows-latest'
-      
+      - name: Zip binaries
+        if: matrix.os != 'windows-latest'
+        run: zip -r ./heracles-${{matrix.NAME}}.zip ./heracles-${{matrix.NAME}}/*
+        
       - name: Zip windows binaries
-        run: zip -r ./heracles-win.zip ./heracles-win/*
         if: matrix.os == 'windows-latest'
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r ./heracles-win.zip ./heracles-win/*
 
-      - name: Create Windows Release
-        if: matrix.os == 'windows-latest'
-        id: create_release_win
+      - name: Create Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}-win
-          release_name: Release ${{ github.ref }} Windows    
+          tag_name: ${{ github.ref }}-${{matrix.NAME}}
+          release_name: Release ${{ github.ref }} ${{matrix.FULLNAME}}    
           draft: false
           prerelease: false
 
-      - name: Create Linux Release
-        if: matrix.os == 'ubuntu-latest'
-        id: create_release_linux
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}-linux
-          release_name: Release ${{ github.ref }} Linux       
-          draft: false
-          prerelease: false
-
-      - name: Create MacOS Release
-        if: matrix.os == 'macos-latest'
-        id: create_release_mac
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}-macos
-          release_name: Release ${{ github.ref }} MacOS        
-          draft: false
-          prerelease: false
-
-      - name: Upload Win10 binary
-        if: matrix.os == 'windows-latest'
+      - name: Upload binary zip to release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release_win.outputs.upload_url }}
-          asset_path: ./heracles-win.zip
-          asset_name: heracles-win.zip
-          asset_content_type: application/zip
-
-      - name: Upload Linux binary
-        if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release_linux.outputs.upload_url }}
-          asset_path: ./heracles-linux.zip
-          asset_name: heracles-linux.zip
-          asset_content_type: application/zip
-
-      - name: Upload MacOS binary
-        if: matrix.os == 'macos-latest'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release_mac.outputs.upload_url }}
-          asset_path: ./heracles-mac.zip
-          asset_name: heracles-mac.zip
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./heracles-${{matrix.NAME}}.zip
+          asset_name: heracles-${{matrix.NAME}}.zip
           asset_content_type: application/zip
