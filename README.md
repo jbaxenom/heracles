@@ -103,7 +103,12 @@ description of the exercise. Some examples are:
   - Does it restart immediatedly instead?\
   - Perhaps it asks the user what to do? How?
 
-In order to 
+In order to finish the implementation I took some assumptions based on the above (normally I would have a PO to ask these questions):
+- I provided some basic messages for the question and answers
+- The application will:
+  - Terminate after pressing a key in DROP 1
+  - Stay running waiting for more calls in DROP 2
+  - Reload the form in DROP 3
 
 ### 2. Breaking AC into Test Cases
 
@@ -181,7 +186,8 @@ Most probably it will be needed, as functionality is added independently and oft
 ### 8. Repeat from step 3
 The whole exercise has been done following the steps above, so there was a lot of repeating!
 
-
+## Usage
+Download the binaries for your OS, decompress them and run the "heracles" binary (you might need to 'chmod +x'). 
 
 
 
