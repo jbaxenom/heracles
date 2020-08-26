@@ -41,16 +41,39 @@ jobs:
         run: zip -r ./heracles-win.zip ./heracles-win/*
         if: matrix.os == 'windows-latest'
 
-      - name: Create Release
-        id: create_release
+      - name: Create Windows Release
+        if: matrix.os == 'windows-latest'
+        id: create_release_win
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release:            
+          tag_name: ${{ github.ref }}-win
+          release_name: Release ${{ github.ref }} Windows    
+          draft: false
+          prerelease: false
+
+      - name: Create Linux Release
+        if: matrix.os == 'ubuntu-latest'
+        id: create_release_linux
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}-linux
+          release_name: Release ${{ github.ref }} Linux       
+          draft: false
+          prerelease: false
+
+      - name: Create MacOS Release
+        if: matrix.os == 'macos-latest'
+        id: create_release_mac
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}-macos
+          release_name: Release ${{ github.ref }} MacOS        
           draft: false
           prerelease: false
 
@@ -60,7 +83,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release_win.outputs.upload_url }}
           asset_path: ./heracles-win.zip
           asset_name: heracles-win.zip
           asset_content_type: application/zip
@@ -71,7 +94,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release_linux.outputs.upload_url }}
           asset_path: ./heracles-linux.zip
           asset_name: heracles-linux.zip
           asset_content_type: application/zip
@@ -82,7 +105,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release_mac.outputs.upload_url }}
           asset_path: ./heracles-mac.zip
           asset_name: heracles-mac.zip
           asset_content_type: application/zip
