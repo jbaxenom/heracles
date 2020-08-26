@@ -10,15 +10,15 @@ namespace server
             var welcomeMessage = "Welcome to HERACLES!";
             Console.WriteLine(welcomeMessage);
             
-            var inputMessage = "\nEnter the amount to format: ";
+            var inputMessage = $"{Environment.NewLine}Enter the amount to format:";
             Console.WriteLine(inputMessage);
 
             string outputMessage;
             try
             {
-                string amount = new ConsoleAmountRetriever().GetAmount();
+                string amount = Console.ReadLine();
                 string formattedMoney = new MoneyFormatter().Format(amount);
-                outputMessage = $"\nThanks! Your formatted amount is: {formattedMoney}";
+                outputMessage = $"{Environment.NewLine}Thanks! Your formatted amount is: {formattedMoney}";
             }
             catch (ArgumentException e)
             {
@@ -27,9 +27,9 @@ namespace server
 
             Console.WriteLine(outputMessage);
 
-            string exitMessage = "\nPress any key to exit Heracles...";
+            string exitMessage = $"{Environment.NewLine}Press any key to exit Heracles...";
             Console.WriteLine(exitMessage);
-            Console.ReadKey();
+            Console.ReadLine();
         }
     }
 }
