@@ -21,7 +21,7 @@ jobs:
           NAME: win
           FULLNAME: Windows
         - os: macos-latest
-          TARGET: ost-x64
+          TARGET: osx-x64
           NAME: mac
           FULLNAME: MacOS
 
@@ -40,9 +40,8 @@ jobs:
         
       - name: Zip windows binaries
         if: matrix.os == 'windows-latest'
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq -r ./heracles-win.zip ./heracles-win/*
+        shell: powershell
+        run: Compress-Archive -Path ./heracles-win -DestinationPath heracles-win.zip
 
       - name: Create Release
         id: create_release
