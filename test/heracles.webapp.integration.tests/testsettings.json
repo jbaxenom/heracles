@@ -1,5 +1,5 @@
 ﻿{
   "TestEndpointSettings": {
-    "BaseUri": "https://localhost:32786"
+    "BaseUri": "http://localhost:32786"
   }
 }

@@ -64,7 +64,9 @@ jobs:
       run: docker build . --file src/heracles.webapp/Dockerfile --tag jmdelbarco/heracles:${{steps.vars.outputs.tag}}
 
     - name: Run Heracles as docker container
-      run: docker run -t -d --name jmdelbarc/heracles -p 32786:443 jdmelbarco/heracles:latest
+      run: docker run -t -d --name heracles -p 32786:80 heracles
 
     - name: Run Integration Tests
+      env: 
+        BASEURI: http://localhost:32786
       run: dotnet test --project test/heracles.webapp.integration.tests/heracles.webapp.integration.tests.csproj --no-build
