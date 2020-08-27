@@ -33,11 +33,11 @@ jobs:
     
     - name: Run Mutation Tests
       run: |
-        cd test/server.unit.tests
+        cd test/heracles.unit.tests
         dotnet stryker
 
     - name: Upload Striker HTML Report
       uses: actions/upload-artifact@v2
       with:
         name: stryker-report
-        path: test/server.unit.tests/StrykerOutput/**/reports/mutation-report.html
+        path: test/heracles.unit.tests/StrykerOutput/**/reports/mutation-report.html

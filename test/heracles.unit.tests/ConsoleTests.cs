@@ -2,8 +2,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using FluentAssertions;
+using heracles.console;
 
-namespace server.unit.tests
+namespace heracles.unit.tests
 {
     [TestClass]
     public class ConsoleTests

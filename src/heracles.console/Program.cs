@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
 
-namespace server
+namespace heracles.console
 {
     public class Program
     {

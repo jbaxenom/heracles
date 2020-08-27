@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace server
+namespace heracles.console
 {
     public class MoneyFormatter
     {
