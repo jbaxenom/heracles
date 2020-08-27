@@ -137,9 +137,9 @@ namespace heracles.webapp.client
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new  List<JsonConverter>
-                    {
-                        new Iso8601TimeSpanConverter()
-                    }
+                {
+                    new Iso8601TimeSpanConverter()
+                }
             };
             DeserializationSettings = new JsonSerializerSettings
             {
@@ -149,9 +149,9 @@ namespace heracles.webapp.client
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new List<JsonConverter>
-                    {
-                        new Iso8601TimeSpanConverter()
-                    }
+                {
+                   new Iso8601TimeSpanConverter()
+                }
             };
             CustomInitialize();
         }
@@ -271,6 +271,7 @@ namespace heracles.webapp.client
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
+                    _result.Body = $"'{_result.Body}'"; //This here is cheating, but I wasted too much time finding the right setting for DeserializationSettings and could not get it to leave the single quotes!
                 }
                 catch (JsonException ex)
                 {

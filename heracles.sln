@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "heracles.webapp.unit.tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heracles.webapp.client", "src\heracles.webapp.client\heracles.webapp.client.csproj", "{093E13FF-1B3D-4148-9C77-D1989980AF03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heracles.webapp.integration.tests", "test\heracles.webapp.integration.tests\heracles.webapp.integration.tests.csproj", "{BDEACA9A-83DA-4CBC-886F-6E23950FE815}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{093E13FF-1B3D-4148-9C77-D1989980AF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{093E13FF-1B3D-4148-9C77-D1989980AF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{093E13FF-1B3D-4148-9C77-D1989980AF03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{462848B4-A967-4A8A-A76C-FC32612A1CA4} = {BD129E66-4EEC-4662-98C0-20D01D225640}
 		{064022D2-FB8A-4B6A-BF24-EFFD11FBCBB3} = {D93CABEA-FA2C-42E6-A341-AB66B403406B}
 		{093E13FF-1B3D-4148-9C77-D1989980AF03} = {BD129E66-4EEC-4662-98C0-20D01D225640}
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815} = {D93CABEA-FA2C-42E6-A341-AB66B403406B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {938C797B-067C-40EA-B52A-D3B5035F80F3}
