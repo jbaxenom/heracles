@@ -1,0 +1,204 @@
+{
+ "$id": "1",
+ "name": "HeraclesBackend",
+ "namespace": "Heracles.webapp.client",
+ "modelsName": "Models",
+ "apiVersion": "v1",
+ "baseUrl": "http://localhost",
+ "documentation": "Backend for Heracles app for Pleo",
+ "properties": [
+  {
+   "$id": "2",
+   "isReadOnly": false,
+   "realPath": [
+    "input"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "3",
+    "fixed": false
+   },
+   "deprecated": false,
+   "documentation": {
+    "$id": "4",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "v1"
+     ],
+     "filename": [
+      "mem:///102?oai3.shaken.json"
+     ],
+     "name": "paths·17f7gnk·api-money-input·get·parameters·0",
+     "originalLocations": [
+      "file:///C:/Users/jbaxe/Repos/heracles/src/heracles.webapp/swagger.json#/components/parameters/paths·17f7gnk·api-money-input·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "5",
+    "fixed": false,
+    "raw": "input"
+   },
+   "serializedName": "input",
+   "modelType": {
+    "$id": "6",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "$id": "7",
+     "fixed": false,
+     "raw": "String"
+    },
+    "deprecated": false
+   }
+  }
+ ],
+ "operations": [
+  {
+   "$id": "8",
+   "methods": [
+    {
+     "$id": "9",
+     "parameters": [
+      {
+       "$id": "10",
+       "clientProperty": {
+        "$ref": "2"
+       },
+       "location": "path",
+       "deprecated": false,
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "11",
+        "fixed": false
+       },
+       "documentation": {
+        "$id": "12",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///102?oai3.shaken.json"
+         ],
+         "name": "paths·17f7gnk·api-money-input·get·parameters·0",
+         "originalLocations": [
+          "file:///C:/Users/jbaxe/Repos/heracles/src/heracles.webapp/swagger.json#/components/parameters/paths·17f7gnk·api-money-input·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "13",
+        "fixed": false,
+        "raw": "input"
+       },
+       "serializedName": "input",
+       "modelType": {
+        "$id": "14",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "15",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       }
+      }
+     ],
+     "name": {
+      "$id": "16",
+      "fixed": false,
+      "raw": "FormatMoney"
+     },
+     "group": {
+      "$id": "17",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "FormatMoney",
+     "url": "/api/Money/{input}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "$id": "18",
+       "body": {
+        "$id": "19",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "$id": "20",
+         "fixed": false,
+         "raw": "String"
+        },
+        "deprecated": false
+       },
+       "extensions": {
+        "$id": "21",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///102?oai3.shaken.json"
+         ],
+         "name": "paths·ifped2·api-money-input·get·responses·200",
+         "originalLocations": [
+          "file:///C:/Users/jbaxe/Repos/heracles/src/heracles.webapp/swagger.json#/components/responses/paths·ifped2·api-money-input·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "22",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "23",
+      "body": {
+       "$ref": "19"
+      },
+      "isNullable": true
+     },
+     "summary": "Returns the money in Heracles format",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "text/plain",
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    }
+   ],
+   "name": {
+    "$id": "24",
+    "fixed": false,
+    "raw": ""
+   },
+   "typeName": {
+    "$id": "25",
+    "fixed": false
+   },
+   "nameForProperty": "HeraclesBackend"
+  }
+ ]
+}

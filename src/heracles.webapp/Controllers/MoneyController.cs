@@ -29,7 +29,7 @@ namespace heracles.webapp.Controllers
                 output = e.Message;
             }
 
-            var logMessage = $"Requested input '{input}', Heracles responded with '{output}'";
+            var logMessage = $"Received input '{input}', Heracles responded with {output}";
             _logger.LogInformation(logMessage);
 
             return output;
