@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace heracles.webapp
 {
@@ -19,6 +21,21 @@ namespace heracles.webapp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("heracles-backend", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Heracles Backend",
+                    Description = "Backend for Heracles app for Pleo",
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "Chema del Barco",
+                        Email = "jmdelbarco@gmail.com",
+                        Url = new Uri("https://github.com/jbaxenom/heracles")
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +55,12 @@ namespace heracles.webapp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/heracles-backend/swagger.json", "Heracles API v1");
             });
         }
     }
