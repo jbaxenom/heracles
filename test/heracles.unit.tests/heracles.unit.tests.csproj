@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="StrykerOutput\**" />
+    <EmbeddedResource Remove="StrykerOutput\**" />
+    <None Remove="StrykerOutput\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="Moq" Version="4.14.5" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
@@ -14,8 +20,8 @@
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
   </ItemGroup>
 
- <ItemGroup>
-   <ProjectReference Include="../../src/server/server.csproj" />
- </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\heracles.console\heracles.console.csproj" />
+  </ItemGroup>
 
 </Project>

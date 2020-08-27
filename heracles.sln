@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "server", "src\server\server.csproj", "{7AD0F8B4-9500-4C12-AD45-3020AA9971F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "heracles.console", "src\heracles.console\heracles.console.csproj", "{7AD0F8B4-9500-4C12-AD45-3020AA9971F3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "server.unit.tests", "test\server.unit.tests\server.unit.tests.csproj", "{EDC58E06-2E25-4521-B7D0-D99D260654D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "heracles.unit.tests", "test\heracles.unit.tests\heracles.unit.tests.csproj", "{EDC58E06-2E25-4521-B7D0-D99D260654D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BD129E66-4EEC-4662-98C0-20D01D225640}"
 EndProject
@@ -16,8 +16,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		.github\workflows\ci.yml = .github\workflows\ci.yml
 		README.md = README.md
-		release.yml = release.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "heracles.webapp", "src\heracles.webapp\heracles.webapp.csproj", "{462848B4-A967-4A8A-A76C-FC32612A1CA4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "heracles.webapp.unit.tests", "test\heracles.webapp.unit.tests\heracles.webapp.unit.tests.csproj", "{064022D2-FB8A-4B6A-BF24-EFFD11FBCBB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heracles.webapp.client", "src\heracles.webapp.client\heracles.webapp.client.csproj", "{093E13FF-1B3D-4148-9C77-D1989980AF03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heracles.webapp.integration.tests", "test\heracles.webapp.integration.tests\heracles.webapp.integration.tests.csproj", "{BDEACA9A-83DA-4CBC-886F-6E23950FE815}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{EDC58E06-2E25-4521-B7D0-D99D260654D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDC58E06-2E25-4521-B7D0-D99D260654D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDC58E06-2E25-4521-B7D0-D99D260654D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{462848B4-A967-4A8A-A76C-FC32612A1CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{462848B4-A967-4A8A-A76C-FC32612A1CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{462848B4-A967-4A8A-A76C-FC32612A1CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{462848B4-A967-4A8A-A76C-FC32612A1CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{064022D2-FB8A-4B6A-BF24-EFFD11FBCBB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{064022D2-FB8A-4B6A-BF24-EFFD11FBCBB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{064022D2-FB8A-4B6A-BF24-EFFD11FBCBB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{064022D2-FB8A-4B6A-BF24-EFFD11FBCBB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{093E13FF-1B3D-4148-9C77-D1989980AF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{093E13FF-1B3D-4148-9C77-D1989980AF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{093E13FF-1B3D-4148-9C77-D1989980AF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{093E13FF-1B3D-4148-9C77-D1989980AF03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +64,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7AD0F8B4-9500-4C12-AD45-3020AA9971F3} = {BD129E66-4EEC-4662-98C0-20D01D225640}
 		{EDC58E06-2E25-4521-B7D0-D99D260654D1} = {D93CABEA-FA2C-42E6-A341-AB66B403406B}
+		{462848B4-A967-4A8A-A76C-FC32612A1CA4} = {BD129E66-4EEC-4662-98C0-20D01D225640}
+		{064022D2-FB8A-4B6A-BF24-EFFD11FBCBB3} = {D93CABEA-FA2C-42E6-A341-AB66B403406B}
+		{093E13FF-1B3D-4148-9C77-D1989980AF03} = {BD129E66-4EEC-4662-98C0-20D01D225640}
+		{BDEACA9A-83DA-4CBC-886F-6E23950FE815} = {D93CABEA-FA2C-42E6-A341-AB66B403406B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {938C797B-067C-40EA-B52A-D3B5035F80F3}

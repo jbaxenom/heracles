@@ -1,8 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using System;
+using heracles.console;
 
-namespace server.unit.tests
+namespace heracles.unit.tests
 {
     [TestClass]
     public class MoneyFormatterTests

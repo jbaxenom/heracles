@@ -25,19 +25,48 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-    - name: Test
-      run: dotnet test --no-build
+    - name: Run Console Unit Tests
+      run: dotnet test test/heracles.unit.tests/heracles.unit.tests.csproj --no-build
+
+    - name: Run WebApp Unit Tests
+      run: dotnet test test/heracles.webapp.unit.tests/heracles.webapp.unit.tests.csproj --no-build
 
     - name: Stryker.NET install
       run: dotnet tool install -g dotnet-stryker
     
-    - name: Run Mutation Tests
+    - name: Run Mutation Testing on Console Unit Tests
       run: |
-        cd test/server.unit.tests
+        cd test/heracles.unit.tests
         dotnet stryker
 
-    - name: Upload Striker HTML Report
+    - name: Run Mutation Testing on WebApp Unit Tests
+      run: |
+        cd test/heracles.webapp.unit.tests
+        dotnet stryker
+
+    - name: Upload Striker HTML Report for Console
       uses: actions/upload-artifact@v2
       with:
-        name: stryker-report
-        path: test/server.unit.tests/StrykerOutput/**/reports/mutation-report.html
+        name: stryker-report-console
+        path: test/heracles.unit.tests/StrykerOutput/**/reports/mutation-report.html
+
+    - name: Upload Striker HTML Report for WebApp
+      uses: actions/upload-artifact@v2
+      with:
+        name: stryker-report-webapp
+        path: test/heracles.webapp.unit.tests/StrykerOutput/**/reports/mutation-report.html
+
+    - name: Get the build version for Docker Tag
+      id: vars
+      run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+
+    - name: Build the tagged Docker image
+      run: docker build . --file src/heracles.webapp/Dockerfile --tag jmdelbarco/heracles:${{steps.vars.outputs.tag}}
+
+    - name: Run Heracles as docker container
+      run: docker run -t -d --name heracles -p 32786:80 heracles
+
+    - name: Run Integration Tests
+      env: 
+        BASEURI: http://localhost:32786
+      run: dotnet test test/heracles.webapp.integration.tests/heracles.webapp.integration.tests.csproj --no-build
