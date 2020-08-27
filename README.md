@@ -185,8 +185,30 @@ Most probably it will be needed, as functionality is added independently and oft
 ### 8. Repeat from step 3
 The whole exercise has been done following the steps above, so there was a lot of repeating!
 
+## DROP 1
+Drop 1 is a console application built using TDD methodology that implements the Heracles specs. It consists of the `heracles.console` and `heracles.unit.tests` projects. 
+
+## DROP 2
+Drop 2 is a web app built on top of Drop 1. It has been created using Visual Studio's ASP.NET Core template, adding the logic in `MoneyFormatter.cs` from DROP 1 as the `MoneyController.cs`
+It also includes:
+- A [SwaggerUI interface](http://localhost:32786/swagger),
+- An auto-generated Heracles http client using the swagger.json contract, built with [AutoRest](https://github.com/Azure/autorest).
+- A docker wrapper to run it locally easily
+- Unit Tests
+- Integration tests with configurable endpoint, pointing now to the docker instance. 
+
+Drop 2 has not been built using TDD, as most of the code was pre-generated. As most of the logic is unit tested the coverage at this level is lower. While more tests could be added, I left them to a minimum due to time constraints. 
+I'm quite happy with the overall coverage, though :).
+
 ## Usage
-Download the binaries for your OS, decompress them and run the "heracles" binary (you might need to 'chmod +x'). 
+- DROP 1: Download the binaries for your OS, decompress them and run the "heracles" binary (you might need to 'chmod +x').\
+- DROP 2: 
+  - Download the [source code](https://github.com/jbaxenom/heracles)
+  - Build the docker image (`docker build . --file src/heracles.webapp/Dockerfile`)
+  - Run the image (`docker run -t -d --name heracles -p 32786:80 heracles`)
+  - Open http://localhost:32786/swagger and let it instruct you on how to use the endpoint :)
+
+
 
 
 
