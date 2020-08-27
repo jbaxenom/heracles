@@ -39,22 +39,11 @@ jobs:
         cd test/heracles.unit.tests
         dotnet stryker
 
-    - name: Run Mutation Testing on WebApp Unit Tests
-      run: |
-        cd test/heracles.webapp.unit.tests
-        dotnet stryker
-
     - name: Upload Striker HTML Report for Console
       uses: actions/upload-artifact@v2
       with:
         name: stryker-report-console
         path: test/heracles.unit.tests/StrykerOutput/**/reports/mutation-report.html
-
-    - name: Upload Striker HTML Report for WebApp
-      uses: actions/upload-artifact@v2
-      with:
-        name: stryker-report-webapp
-        path: test/heracles.webapp.unit.tests/StrykerOutput/**/reports/mutation-report.html
 
     - name: Get the build version for Docker Tag
       id: vars
